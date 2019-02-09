@@ -1,0 +1,16 @@
+#set("title") { Success! }
+
+#set("body") {
+    <h1>
+        You were successfully added to the classroom. Welcome! ようこそ！
+    </h1>
+    <p>
+        Please note that it may take a few seconds until your data is fetched from WaniKani.
+    </p>
+
+    <a href="members">
+        Back to Members List
+    </a>
+}
+
+#embed("base")

@@ -1,3 +1,4 @@
+import FluentPostgreSQL
 import Leaf
 import Vapor
 
@@ -5,6 +6,7 @@ import Vapor
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
     // Register providers first
     try services.register(LeafProvider())
+    try services.register(FluentPostgreSQLProvider())
 
     // Register routes to the router
     let router = EngineRouter.default()
@@ -19,4 +21,9 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
     services.register(middlewares)
+
+    // Configure migrations
+    var migrations = MigrationConfig()
+    migrations.add(model: Member.self, database: .psql)
+    services.register(migrations)
 }

@@ -1,0 +1,15 @@
+#set("title") { Become a Member }
+
+#set("body") {
+  <form method="POST" action="/members">
+    <label>Username:</label><br />
+    <input type="text" name="username"><br />
+    <label>WaniKani start date:</label><br />
+    <input type="date" name="waniKaniStartDate"><br />
+    <label>Native languages (optional):</label><br />
+    <input type="text" name="nativeLanguages"><br />
+    <button type="submit">Become Member</button>
+  </form>
+}
+
+#embed("base")

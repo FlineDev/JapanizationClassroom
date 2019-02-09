@@ -1,0 +1,68 @@
+#set("title") { Members List }
+
+#set("body") {
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <td>WaniKani start date</td>
+            <td>Username</td>
+            <td>Level</td>
+            <td>Apprentice</td>
+            <td>Guru</td>
+            <td>Master</td>
+            <td>Enlightened</td>
+            <td>Burned</td>
+            <td>Unlocked</td>
+            <td>Unlocks per day</td>
+            <td>Native language(s)</td>
+            <td>AJC class member since</td>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        #for(member in members) {
+          <tr>
+            <td>#(member.waniKaniStartDate)</td>
+            <td>#(member.username)</td>
+            <td>#(member.level)</td>
+            <td>#(member.apprentice)</td>
+            <td>#(member.guru)</td>
+            <td>#(member.master)</td>
+            <td>#(member.enlightened)</td>
+            <td>#(member.burned)</td>
+            <td>#(member.unlocked)</td>
+            <td>#(member.unlocksPerDay)</td>
+            <td>#(member.nativeLanguages)</td>
+            <td>#(member.ajcJoinDate)</td>
+          </tr>
+        }
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>
+            <td></td>
+            <td></td>
+            <td>Ø #(average.level)</td>
+            <td>Ø #(average.apprentice)</td>
+            <td>Ø #(average.guru)</td>
+            <td>Ø #(average.master)</td>
+            <td>Ø #(average.enlightened)</td>
+            <td>Ø #(average.burned)</td>
+            <td>Ø #(average.unlocked)</td>
+            <td>Ø #(average.unlocksPerDay)</td>
+            <td></td>
+            <td></td>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+
+    <p>
+        <a href="members/new">
+            Become a member
+        </a>
+    </p>
+}
+
+#embed("base")
