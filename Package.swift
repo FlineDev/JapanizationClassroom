@@ -15,9 +15,12 @@ let package = Package(
 
         // Handy Swift features that didn't make it into the Swift standard library.
         .package(url: "https://github.com/Flinesoft/HandySwift.git", from: "2.7.0"),
+
+        // The better way to deal with JSON data in Swift.
+        .package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", from: "4.2.0"),
     ],
     targets: [
-        .target(name: "App", dependencies: ["HandySwift", "FluentPostgreSQL", "Leaf", "Vapor"]),
+        .target(name: "App", dependencies: ["SwiftyJSON", "HandySwift", "FluentPostgreSQL", "Leaf", "Vapor"]),
         .target(name: "Run", dependencies: ["App"]),
         .testTarget(name: "AppTests", dependencies: ["App"])
     ]

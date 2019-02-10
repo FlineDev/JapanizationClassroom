@@ -2,14 +2,8 @@ import Vapor
 
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
-    router.get("members", "new") { req -> Future<View> in
-        return try req.view().render("Members/new")
-    }
-
-    router.post("members") { req -> Future<View> in
-        return try req.content.decode(Member.self).create(on: req).flatMap { member in
-            return try req.view().render("success")
-        }
+    router.get("") { req in
+        req.redirect(to: "members")
     }
 
     router.get("members") { req -> Future<View> in
@@ -25,6 +19,18 @@ public func routes(_ router: Router) throws {
             )
 
             return try req.view().render("Members/index", MembersIndexContext(members: members, average: average))
+        }
+    }
+
+    router.get("members", "new") { req -> Future<View> in
+        return try req.view().render("Members/new")
+    }
+
+    router.post("members") { req -> Future<View> in
+        return try req.content.decode(Member.self).create(on: req).flatMap { member in
+            // TODO: fetch user data from wanikani
+
+            return try req.view().render("success")
         }
     }
 }
