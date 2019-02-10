@@ -8,6 +8,22 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     try services.register(LeafProvider())
     try services.register(FluentPostgreSQLProvider())
 
+    // Configure a database
+    let dbConfig: PostgreSQLDatabaseConfig
+    if let url = Environment.get("DATABASE_URL"), let psqlConfig = PostgreSQLDatabaseConfig(url: url) {
+        dbConfig = psqlConfig
+    } else {
+        dbConfig = try PostgreSQLDatabaseConfig.default()
+    }
+
+    let postgresql = PostgreSQLDatabase(config: dbConfig)
+
+    /// Register the configured SQLite database to the database config.
+    var databases = DatabasesConfig()
+    databases.add(database: postgresql, as: .psql)
+    services.register(databases)
+
+
     // Register routes to the router
     let router = EngineRouter.default()
     try routes(router)
