@@ -49,4 +49,11 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
         config.use(RoundTag(), as: "round")
         return config
     }
+
+    /// Create a `CommandConfig` with default commands.
+    var commandConfig = CommandConfig.default()
+    /// Add the `CowsayCommand`.
+    commandConfig.use(WaniKaniFetchCommand(), as: "waniKaniFetch")
+    /// Register this `CommandConfig` to services.
+    services.register(commandConfig)
 }
