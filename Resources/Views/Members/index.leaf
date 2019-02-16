@@ -5,18 +5,90 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>WaniKani start date</th>
-          <th>Username</th>
-          <th>Level</th>
-          <th>Apprentice</th>
-          <th>Guru</th>
-          <th>Master</th>
-          <th>Enlightened</th>
-          <th>Burned</th>
-          <th>Unlocked</th>
-          <th>Unlocks per day</th>
-          <th>Native language(s)</th>
-          <th>AJC class member since</th>
+          <th>
+            #if(sortBy == "waniKaniStartDate") {
+              WaniKani start date
+            } else {
+              <a href="?sortBy=waniKaniStartDate">WaniKani start date</a>
+            }
+          </th>
+          <th>
+            #if(sortBy == "username") {
+              Username
+            } else {
+              <a href="?sortBy=username">Username</a>
+            }
+          </th>
+          <th>
+            #if(sortBy == "level") {
+              Level
+            } else {
+              <a href="?sortBy=level">Level</a>
+            }
+          </th>
+          <th>
+            #if(sortBy == "apprentice") {
+              Apprentice
+            } else {
+              <a href="?sortBy=apprentice">Apprentice</a>
+            }
+          </th>
+          <th>
+            #if(sortBy == "guru") {
+              Guru
+            } else {
+              <a href="?sortBy=guru">Guru</a>
+            }
+          </th>
+          <th>
+            #if(sortBy == "master") {
+              Master
+            } else {
+              <a href="?sortBy=master">Master</a>
+            }
+          </th>
+          <th>
+            #if(sortBy == "enlightened") {
+              Enlightened
+            } else {
+              <a href="?sortBy=enlightened">Enlightened</a>
+            }
+          </th>
+          <th>
+            #if(sortBy == "burned") {
+              Burned
+            } else {
+              <a href="?sortBy=burned">Burned</a>
+            }
+          </th>
+          <th>
+            #if(sortBy == "unlocked") {
+              Unlocked
+            } else {
+              <a href="?sortBy=unlocked">Unlocked</a>
+            }
+          </th>
+          <th>
+            #if(sortBy == "unlocksPerDay") {
+              Unlocks per day
+            } else {
+              <a href="?sortBy=unlocksPerDay">Unlocks per day</a>
+            }
+          </th>
+          <th>
+            #if(sortBy == "nativeLanguages") {
+              Native language(s)
+            } else {
+              <a href="?sortBy=nativeLanguages">Native language(s)</a>
+            }
+          </th>
+          <th>
+            #if(sortBy == "ajcJoinDate") {
+              AJC class member since
+            } else {
+              <a href="?sortBy=ajcJoinDate">AJC class member since</a>
+            }
+          </th>
         </tr>
       </thead>
       <tbody>

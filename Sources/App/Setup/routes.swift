@@ -1,4 +1,5 @@
 import Vapor
+import FluentPostgreSQL
 
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
@@ -7,7 +8,56 @@ public func routes(_ router: Router) throws {
     }
 
     router.get("members") { req -> Future<View> in
-        return Member.query(on: req).all().flatMap(to: View.self) { members in
+        var sortBy: String = "waniKaniStartDate"
+
+        if let membersQuery = try? req.query.decode(MembersQuery.self) {
+            sortBy = membersQuery.sortBy
+        }
+
+        let members: QueryBuilder<PostgreSQLDatabase, Member> = {
+            switch sortBy {
+            case "waniKaniStartDate":
+                return Member.query(on: req).sort(\Member.waniKaniStartDate)
+
+            case "username":
+                return Member.query(on: req).sort(\Member.username)
+
+            case "level":
+                return Member.query(on: req).sort(\Member.level)
+
+            case "apprentice":
+                return Member.query(on: req).sort(\Member.apprentice)
+
+            case "guru":
+                return Member.query(on: req).sort(\Member.guru)
+
+            case "master":
+                return Member.query(on: req).sort(\Member.master)
+
+            case "enlightened":
+                return Member.query(on: req).sort(\Member.enlightened)
+
+            case "burned":
+                return Member.query(on: req).sort(\Member.burned)
+
+            case "unlocked":
+                return Member.query(on: req).sort(\Member.unlocked)
+
+            case "unlocksPerDay":
+                return Member.query(on: req).sort(\Member.unlocksPerDay)
+
+            case "nativeLanguages":
+                return Member.query(on: req).sort(\Member.nativeLanguages)
+
+            case "ajcJoinDate":
+                return Member.query(on: req).sort(\Member.ajcJoinDate)
+
+            default:
+                return Member.query(on: req).sort(\Member.waniKaniStartDate)
+            }
+        }()
+
+        return members.all().flatMap(to: View.self) { members in
             let average = Average(
                 level:          Double(members.reduce(0) { $0 + $1.level })         / Double(members.count),
                 apprentice:     Double(members.reduce(0) { $0 + $1.apprentice })    / Double(members.count),
@@ -19,7 +69,7 @@ public func routes(_ router: Router) throws {
                 unlocksPerDay:  Double(members.reduce(0) { $0 + $1.unlocksPerDay }) / Double(members.count)
             )
 
-            return try req.view().render("Members/index", MembersIndexContext(members: members, average: average))
+            return try req.view().render("Members/index", MembersIndexContext(members: members, average: average, sortBy: sortBy))
         }
     }
 
