@@ -16,9 +16,6 @@
 		<link rel="stylesheet" href="/assets/css/unify-core.css">
 		<link rel="stylesheet" href="/assets/css/unify-components.css">
 		<link rel="stylesheet" href="/assets/css/unify-globals.css">
-
-		<!-- CSS Customization -->
-		<link rel="stylesheet" href="/assets/css/custom.css">
 	</head>
 
 	<body>
@@ -30,13 +27,10 @@
 	  <!-- JS Global Compulsory -->
 	  <script src="/assets/vendor/jquery/jquery.min.js"></script>
 	  <script src="/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
-	  <script src="/assets/vendor/popper.js/popper.min.js"></script>
+	  <script src="/assets/vendor/popper/popper.min.js"></script>
 	  <script src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
 
 	  <!-- JS Unify -->
 	  <script src="/assets/js/hs.core.js"></script>
-
-	  <!-- JS Custom -->
-	  <script src="/assets/js/custom.js"></script>
 	</body>
 </html>
