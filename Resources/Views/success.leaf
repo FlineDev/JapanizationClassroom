@@ -1,7 +1,7 @@
 #set("title") { Success! }
 
 #set("body") {
-    <h3>
+    <h3 class="g-pa-30">
         You were successfully added to the classroom. Welcome! ようこそ！
     </h3>
 

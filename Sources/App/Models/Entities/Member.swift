@@ -29,13 +29,8 @@ final class Member: PostgreSQLModel {
     var enlightened: Int
     var burned: Int
 
-    var unlocked: Int {
-        return apprentice + guru + master + enlightened + burned
-    }
-
-    var unlocksPerDay: Double {
-        return Double(unlocked) / Date().timeIntervalSince(waniKaniStartDate).days
-    }
+    var unlocked: Int
+    var unlocksPerDay: Double
 
     /// Creates a new user.
     init(memberInput: MemberInput, waniKaniUserSRSDistribution: WaniKaniUserSRSDistribution) {
@@ -55,6 +50,9 @@ final class Member: PostgreSQLModel {
         self.master         = waniKaniUserSRSDistribution.requestedInformation.master.total
         self.enlightened    = waniKaniUserSRSDistribution.requestedInformation.enlighten.total
         self.burned         = waniKaniUserSRSDistribution.requestedInformation.burned.total
+
+        self.unlocked       = apprentice + guru + master + enlightened + burned
+        self.unlocksPerDay  = Double(unlocked) / Date().timeIntervalSince(waniKaniStartDate).days
     }
 
     struct UpdateResult {

@@ -31,7 +31,7 @@
             <td>#(member.enlightened)</td>
             <td>#(member.burned)</td>
             <td>#(member.unlocked)</td>
-            <td>#(member.unlocksPerDay)</td>
+            <td>#round(member.unlocksPerDay, 2)</td>
             <td>#(member.nativeLanguages)</td>
             <td>#date(member.ajcJoinDate, "yyyy-MM-dd")</td>
           </tr>
@@ -41,14 +41,14 @@
         <tr>
             <th></th>
             <th></th>
-            <th>Ø #(average.level)</th>
-            <th>Ø #(average.apprentice)</th>
-            <th>Ø #(average.guru)</th>
-            <th>Ø #(average.master)</th>
-            <th>Ø #(average.enlightened)</th>
-            <th>Ø #(average.burned)</th>
-            <th>Ø #(average.unlocked)</th>
-            <th>Ø #(average.unlocksPerDay)</th>
+            <th>Ø #round(average.level, 2)</th>
+            <th>Ø #round(average.apprentice, 2)</th>
+            <th>Ø #round(average.guru, 2)</th>
+            <th>Ø #round(average.master, 2)</th>
+            <th>Ø #round(average.enlightened, 2)</th>
+            <th>Ø #round(average.burned, 2)</th>
+            <th>Ø #round(average.unlocked, 2)</th>
+            <th>Ø #round(average.unlocksPerDay, 2)</th>
             <th></th>
             <th></th>
         </tr>

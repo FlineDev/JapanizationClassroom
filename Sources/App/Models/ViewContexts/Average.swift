@@ -8,9 +8,6 @@ struct Average: Encodable {
     let enlightened: Double
     let burned: Double
 
+    let unlocked: Double
     let unlocksPerDay: Double
-
-    var unlocked: Double {
-        return apprentice + guru + master + enlightened + burned
-    }
 }

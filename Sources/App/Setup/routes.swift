@@ -15,6 +15,7 @@ public func routes(_ router: Router) throws {
                 master:         Double(members.reduce(0) { $0 + $1.master })        / Double(members.count),
                 enlightened:    Double(members.reduce(0) { $0 + $1.enlightened })   / Double(members.count),
                 burned:         Double(members.reduce(0) { $0 + $1.burned })        / Double(members.count),
+                unlocked:       Double(members.reduce(0) { $0 + $1.unlocked })      / Double(members.count),
                 unlocksPerDay:  Double(members.reduce(0) { $0 + $1.unlocksPerDay }) / Double(members.count)
             )
 

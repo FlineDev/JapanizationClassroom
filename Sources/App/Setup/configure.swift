@@ -42,4 +42,11 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     var migrations = MigrationConfig()
     migrations.add(model: Member.self, database: .psql)
     services.register(migrations)
+
+    // Configure custom tags
+    services.register { container -> LeafTagConfig in
+        var config = LeafTagConfig.default()
+        config.use(RoundTag(), as: "round")
+        return config
+    }
 }
