@@ -23,14 +23,14 @@ public func routes(_ router: Router) throws {
     }
 
     router.get("members", "new") { req -> Future<View> in
-        return try req.view().render("Members/new")
+        return try req.view().render("Members/new", MembersNewContext())
     }
 
     router.post("members") { req -> Future<View> in
-        return try req.content.decode(Member.self).create(on: req).flatMap { member in
-            // TODO: fetch user data from wanikani
-
-            return try req.view().render("success")
+        return try req.content.decode(MemberInput.self).flatMap { memberInput in
+            return Member(memberInput: memberInput).create(on: req).flatMap { member in
+                try req.view().render("success")
+            }
         }
     }
 }

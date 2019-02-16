@@ -21,12 +21,12 @@ final class Member: PostgreSQLModel {
     var nativeLanguages: String?
 
     // MARK: Current WaniKani user data.
-    var level: Int = 0
-    var apprentice: Int = 0
-    var guru: Int = 0
-    var master: Int = 0
-    var enlightened: Int = 0
-    var burned: Int = 0
+    var level:          Int = 0
+    var apprentice:     Int = 0
+    var guru:           Int = 0
+    var master:         Int = 0
+    var enlightened:    Int = 0
+    var burned:         Int = 0
 
     var unlocked: Int {
         return apprentice + guru + master + enlightened + burned
@@ -37,11 +37,14 @@ final class Member: PostgreSQLModel {
     }
 
     /// Creates a new user.
-    init(id: Int? = nil, username: String, waniKaniStartDate: Date, nativeLanguages: String?) {
-        self.id = id
-        self.username = username
-        self.waniKaniStartDate = waniKaniStartDate
-        self.nativeLanguages = nativeLanguages
+    init(memberInput: MemberInput) {
+        self.username = memberInput.username
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        self.waniKaniStartDate = dateFormatter.date(from: memberInput.waniKaniStartDate)!
+        self.nativeLanguages = memberInput.nativeLanguages
         self.ajcJoinDate = Date()
     }
 
