@@ -1,23 +1,22 @@
-#set("title") { Members List }
+#set("title") { Active Japanization Classroom }
 
 #set("body") {
-    <table>
+  <div class="table-responsive">
+    <table class="table table-striped">
       <thead>
         <tr>
-          <th>
-            <td>WaniKani start date</td>
-            <td>Username</td>
-            <td>Level</td>
-            <td>Apprentice</td>
-            <td>Guru</td>
-            <td>Master</td>
-            <td>Enlightened</td>
-            <td>Burned</td>
-            <td>Unlocked</td>
-            <td>Unlocks per day</td>
-            <td>Native language(s)</td>
-            <td>AJC class member since</td>
-          </th>
+          <th>WaniKani start date</th>
+          <th>Username</th>
+          <th>Level</th>
+          <th>Apprentice</th>
+          <th>Guru</th>
+          <th>Master</th>
+          <th>Enlightened</th>
+          <th>Burned</th>
+          <th>Unlocked</th>
+          <th>Unlocks per day</th>
+          <th>Native language(s)</th>
+          <th>AJC class member since</th>
         </tr>
       </thead>
       <tbody>
@@ -40,29 +39,28 @@
       </tbody>
       <tfoot>
         <tr>
-          <th>
-            <td></td>
-            <td></td>
-            <td>Ø #(average.level)</td>
-            <td>Ø #(average.apprentice)</td>
-            <td>Ø #(average.guru)</td>
-            <td>Ø #(average.master)</td>
-            <td>Ø #(average.enlightened)</td>
-            <td>Ø #(average.burned)</td>
-            <td>Ø #(average.unlocked)</td>
-            <td>Ø #(average.unlocksPerDay)</td>
-            <td></td>
-            <td></td>
-          </th>
+            <th></th>
+            <th></th>
+            <th>Ø #(average.level)</th>
+            <th>Ø #(average.apprentice)</th>
+            <th>Ø #(average.guru)</th>
+            <th>Ø #(average.master)</th>
+            <th>Ø #(average.enlightened)</th>
+            <th>Ø #(average.burned)</th>
+            <th>Ø #(average.unlocked)</th>
+            <th>Ø #(average.unlocksPerDay)</th>
+            <th></th>
+            <th></th>
         </tr>
       </tfoot>
     </table>
 
-    <p>
-        <a href="members/new">
-            Become a member
-        </a>
-    </p>
+    <div align="center" class="g-pa-30">
+      <a class="btn u-btn-outline-darkgray g-rounded-50 g-mr-10 g-mb-15" href="members/new">
+          Become a member
+      </a>
+    </div>
+  </div>
 }
 
 #embed("base")

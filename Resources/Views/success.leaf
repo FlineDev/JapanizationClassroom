@@ -5,9 +5,11 @@
         You were successfully added to the classroom. Welcome! ようこそ！
     </h3>
 
-    <a href="members">
-        Back to Members List
-    </a>
+    <div align="center" class="g-pa-30">
+      <a class="btn u-btn-outline-darkgray g-rounded-50 g-mr-10 g-mb-15" href="members">
+          Back to Members List
+      </a>
+    </div>
 }
 
 #embed("base")

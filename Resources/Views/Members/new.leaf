@@ -1,14 +1,14 @@
 #set("title") { Become a Member }
 
 #set("body") {
-  <form method="POST" action="/members">
-    <label>Public API Key – Version 1 (obtain from <a target="_blank" rel="noopener noreferrer" href="https://www.wanikani.com/settings/account#public-api-key">here</a>):</label><br />
-    <input type="text" name="apiKey"><br />
-    <label>WaniKani start date:</label><br />
-    <input type="date" name="waniKaniStartDate" min="2016-01-01" max="#(todayDate)"><br />
-    <label>Native languages (optional):</label><br />
-    <input type="text" name="nativeLanguages"><br />
-    <button type="submit">Become Member</button>
+  <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" method="POST" action="/members">
+    <label class="g-mb-10">Public API Key – Version 1 (obtain from <a target="_blank" rel="noopener noreferrer" href="https://www.wanikani.com/settings/account#public-api-key">here</a>):</label><br />
+    <input class="form-control form-control-md rounded-0" type="text" name="apiKey"><br />
+    <label class="g-mb-10">WaniKani start date:</label><br />
+    <input class="form-control form-control-md rounded-0" type="date" name="waniKaniStartDate" min="2016-01-01" max="#(todayDate)"><br />
+    <label class="g-mb-10">Native languages (optional):</label><br />
+    <input class="form-control form-control-md rounded-0" type="text" name="nativeLanguages"><br />
+    <button class="btn btn-md u-btn-primary g-rounded-50 g-mr-10 g-mb-15" type="submit">Become Member</button>
   </form>
 }
 

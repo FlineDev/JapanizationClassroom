@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>#get(title)</title>
-	<link rel="stylesheet" href="/styles/app.css">
-</head>
-<body>
-    #get(body)
-</body>
+<html lang="en">
+	<head>
+		<!-- Title -->
+		<title>#get(title)</title>
+
+		<!-- Required Meta Tags Always Come First -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+		<!-- CSS Global Compulsory -->
+		<link rel="stylesheet" href="/assets/vendor/bootstrap/bootstrap.min.css">
+
+		<!-- CSS Unify -->
+		<link rel="stylesheet" href="/assets/css/unify-core.css">
+		<link rel="stylesheet" href="/assets/css/unify-components.css">
+		<link rel="stylesheet" href="/assets/css/unify-globals.css">
+
+		<!-- CSS Customization -->
+		<link rel="stylesheet" href="/assets/css/custom.css">
+	</head>
+
+	<body>
+	  <main>
+			<h1 class="g-pa-30">#get(title)</h1>
+			#get(body)
+	  </main>
+
+	  <!-- JS Global Compulsory -->
+	  <script src="/assets/vendor/jquery/jquery.min.js"></script>
+	  <script src="/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+	  <script src="/assets/vendor/popper.js/popper.min.js"></script>
+	  <script src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
+
+	  <!-- JS Unify -->
+	  <script src="/assets/js/hs.core.js"></script>
+
+	  <!-- JS Custom -->
+	  <script src="/assets/js/custom.js"></script>
+	</body>
 </html>
