@@ -15,18 +15,19 @@ final class Member: PostgreSQLModel {
     /// The unique identifier for this user.
     var id: Int?
 
-    var username: String
+    var apiKey: String
     var waniKaniStartDate: Date
     var ajcJoinDate: Date
     var nativeLanguages: String?
 
     // MARK: Current WaniKani user data.
-    var level:          Int = 0
-    var apprentice:     Int = 0
-    var guru:           Int = 0
-    var master:         Int = 0
-    var enlightened:    Int = 0
-    var burned:         Int = 0
+    var username: String
+    var level: Int
+    var apprentice: Int
+    var guru: Int
+    var master: Int
+    var enlightened: Int
+    var burned: Int
 
     var unlocked: Int {
         return apprentice + guru + master + enlightened + burned
@@ -37,63 +38,28 @@ final class Member: PostgreSQLModel {
     }
 
     /// Creates a new user.
-    init(memberInput: MemberInput) {
-        self.username = memberInput.username
+    init(memberInput: MemberInput, waniKaniUserSRSDistribution: WaniKaniUserSRSDistribution) {
+        self.apiKey = memberInput.apiKey
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
 
         self.waniKaniStartDate = dateFormatter.date(from: memberInput.waniKaniStartDate)!
-        self.nativeLanguages = memberInput.nativeLanguages
         self.ajcJoinDate = Date()
+        self.nativeLanguages = memberInput.nativeLanguages
+
+        self.username       = waniKaniUserSRSDistribution.userInformation.username
+        self.level          = waniKaniUserSRSDistribution.userInformation.level
+        self.apprentice     = waniKaniUserSRSDistribution.requestedInformation.apprentice.total
+        self.guru           = waniKaniUserSRSDistribution.requestedInformation.guru.total
+        self.master         = waniKaniUserSRSDistribution.requestedInformation.master.total
+        self.enlightened    = waniKaniUserSRSDistribution.requestedInformation.enlighten.total
+        self.burned         = waniKaniUserSRSDistribution.requestedInformation.burned.total
     }
 
     struct UpdateResult {
         let success: Bool
         let info: String?
-    }
-
-    func fetchDataFromWaniKani(on connectable: DatabaseConnectable) throws -> Future<UpdateResult> {
-        let profileContents = try String(contentsOf: URL(string: "https://www.wanikani.com/users/\(username)")!)
-        let srsCountsRegex = try Regex("var srsCounts = (.+\\});\\n")
-
-        guard let srsCountsString = srsCountsRegex.firstMatch(in: profileContents)?.captures.first else {
-            return connectable.future(UpdateResult(success: false, info: "No user with name '\(username)' found."))
-        }
-
-        let srsCountsJson = JSON(parseJSON: srsCountsString!)
-        let userInformationJson = srsCountsJson["user_information"]
-        let requestedInformation = srsCountsJson["requested_information"]
-
-        let valuesBeforeUpdate = [level, apprentice, guru, master, enlightened, burned]
-
-        level           = userInformationJson["level"].intValue
-        apprentice      = requestedInformation["apprentice"]["total"].intValue
-        guru            = requestedInformation["guru"]["total"].intValue
-        master          = requestedInformation["master"]["total"].intValue
-        enlightened     = requestedInformation["enlighten"]["total"].intValue
-        burned          = requestedInformation["burned"]["total"].intValue
-
-        let valuesAfterUpdate = [level, apprentice, guru, master, enlightened, burned]
-
-        guard valuesAfterUpdate != valuesBeforeUpdate else {
-            if fluentUpdatedAt != nil && Date().timeIntervalSince(fluentUpdatedAt!) > .days(7) {
-                // TODO: send email to member / post message to thread
-                return connectable.future(UpdateResult(success: false, info: "User '\(username)' didn't have any changes since more than 7 days."))
-            } else {
-                if fluentUpdatedAt != nil && Date().timeIntervalSince(fluentUpdatedAt!) > .days(5) {
-                    // TODO: send warning email to member
-                }
-
-                return connectable.future(UpdateResult(success: true, info: "Nothing changed for user '\(username)' since last update."))
-            }
-        }
-
-        guard level > 3 else {
-            return connectable.future(UpdateResult(success: false, info: "User '\(username)' must be above level 3, but is at level \(level)."))
-        }
-
-        return connectable.future(UpdateResult(success: true, info: nil))
     }
 }
 

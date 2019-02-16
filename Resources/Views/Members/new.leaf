@@ -2,8 +2,8 @@
 
 #set("body") {
   <form method="POST" action="/members">
-    <label>Username:</label><br />
-    <input type="text" name="username"><br />
+    <label>Public API Key – Version 1 (obtain from <a target="_blank" rel="noopener noreferrer" href="https://www.wanikani.com/settings/account#public-api-key">here</a>):</label><br />
+    <input type="text" name="apiKey"><br />
     <label>WaniKani start date:</label><br />
     <input type="date" name="waniKaniStartDate" min="2016-01-01" max="#(todayDate)"><br />
     <label>Native languages (optional):</label><br />

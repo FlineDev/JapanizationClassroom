@@ -28,8 +28,16 @@ public func routes(_ router: Router) throws {
 
     router.post("members") { req -> Future<View> in
         return try req.content.decode(MemberInput.self).flatMap { memberInput in
-            return Member(memberInput: memberInput).create(on: req).flatMap { member in
-                try req.view().render("success")
+            return Member.query(on: req).all().flatMap { members in
+                guard !members.contains(where: { $0.apiKey == memberInput.apiKey }) else {
+                    throw HTTPError(identifier: "existingUser", reason: "User with given API key already exists.")
+                }
+
+                return try WaniKaniFetchService().fetchUserSRSDistribution(on: req, apiKey: memberInput.apiKey).flatMap { waniKaniUserSRSDistribution in
+                    return Member(memberInput: memberInput, waniKaniUserSRSDistribution: waniKaniUserSRSDistribution).create(on: req).flatMap { member in
+                        try req.view().render("success")
+                    }
+                }
             }
         }
     }
