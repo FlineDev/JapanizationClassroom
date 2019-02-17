@@ -4,8 +4,23 @@
   <form class="g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30" method="POST" action="/members">
     <label class="g-mb-10">Public API Key – Version 1 (obtain from <a target="_blank" rel="noopener noreferrer" href="https://www.wanikani.com/settings/account#public-api-key">here</a>):</label><br />
     <input class="form-control form-control-md rounded-0" type="text" name="apiKey"><br />
-    <label class="g-mb-10">WaniKani start date:</label><br />
-    <input class="form-control form-control-md rounded-0" type="date" name="waniKaniStartDate" min="2016-01-01" max="#(todayDate)"><br />
+
+    #if(browserSupportsDateInput) {
+      <label class="g-mb-10">WaniKani start date:</label><br />
+      <input class="form-control form-control-md rounded-0" type="date" name="waniKaniStartDate" min="2010-01-01" max="#(todayDate)"><br />
+    } else {
+      <div class="form-group g-mb-30">
+        <label class="g-mb-10">WaniKani start date:</label><br />
+        <div class="input-group g-brd-primary--focus">
+          <input id="datepickerDefault" class="form-control form-control-md u-datepicker-v1 g-brd-right-none rounded-0" type="text" name="waniKaniStartDate">
+          <div class="input-group-append">
+            <span class="input-group-text rounded-0 g-color-gray-dark-v5"><i class="icon-calendar"></i></span>
+          </div>
+        </div>
+      </div>
+      <br />
+    }
+
     <label class="g-mb-10">Native languages (optional):</label><br />
     <input class="form-control form-control-md rounded-0" type="text" name="nativeLanguages"><br />
     <button class="btn btn-md u-btn-primary g-rounded-50 g-mr-10 g-mb-15" type="submit">Become Member</button>

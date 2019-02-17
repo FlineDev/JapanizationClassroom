@@ -18,9 +18,12 @@ let package = Package(
 
         // The better way to deal with JSON data in Swift.
         .package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", from: "4.2.0"),
+
+        // Lightweight User-Agent String Parser (Port of ua-parser.js in Swift)
+        .package(url: "https://github.com/malcommac/UAParserSwift.git", from: "1.0.1"),
     ],
     targets: [
-        .target(name: "App", dependencies: ["SwiftyJSON", "HandySwift", "FluentPostgreSQL", "Leaf", "Vapor"]),
+        .target(name: "App", dependencies: ["UAParserSwift", "SwiftyJSON", "HandySwift", "FluentPostgreSQL", "Leaf", "Vapor"]),
         .target(name: "Run", dependencies: ["App"]),
         .testTarget(name: "AppTests", dependencies: ["App"])
     ]

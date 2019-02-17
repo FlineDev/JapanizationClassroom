@@ -16,6 +16,11 @@
 		<link rel="stylesheet" href="/assets/css/unify-core.css">
 		<link rel="stylesheet" href="/assets/css/unify-components.css">
 		<link rel="stylesheet" href="/assets/css/unify-globals.css">
+
+	  <!-- CSS Global Icons -->
+		<link rel="stylesheet" href="/assets/vendor/icon-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/assets/vendor/icon-line/css/simple-line-icons.css">
+		<link rel="stylesheet" href="/assets/vendor/jquery-ui/themes/base/jquery-ui.min.css">
 	</head>
 
 	<body>
@@ -30,7 +35,20 @@
 	  <script src="/assets/vendor/popper/popper.min.js"></script>
 	  <script src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
 
-	  <!-- JS Unify -->
+		<!-- JS Unify -->
 	  <script src="/assets/js/hs.core.js"></script>
+
+		<!-- Date Picker -->
+		<script src="/assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/assets/js/components/hs.datepicker.js"></script>
+    <script>
+      $(document).on('ready', function () {
+        // initialization of forms
+        $.HSCore.components.HSDatepicker.init('#datepickerDefault, #datepickerInline, #datepickerInlineFrom, #datepickerFrom');
+				$( "#datepickerDefault" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+				$( "#datepickerDefault" ).datepicker( "option", "minDate", -365 * 10);
+				$( "#datepickerDefault" ).datepicker( "option", "maxDate", 0);
+      });
+    </script>
 	</body>
 </html>

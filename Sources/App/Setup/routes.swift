@@ -1,5 +1,6 @@
 import Vapor
 import FluentPostgreSQL
+import UAParserSwift
 
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
@@ -74,7 +75,27 @@ public func routes(_ router: Router) throws {
     }
 
     router.get("members", "new") { req -> Future<View> in
-        return try req.view().render("Members/new", MembersNewContext())
+        let browserSupportsDateInput: Bool = {
+            if let userAgentString = req.http.headers["User-Agent"].first {
+                let userAgent: UAParser = UAParser(agent: userAgentString)
+
+                if let browser: Browser = userAgent.browser {
+                    switch browser.name {
+                    case "Firefox", "Chrome", "Opera", "Android Browser", "Chromium", "Edge", "Baidu":
+                        return true
+
+                    default:
+                        return false
+                    }
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        }()
+
+        return try req.view().render("Members/new", MembersNewContext(browserSupportsDateInput: browserSupportsDateInput))
     }
 
     router.post("members") { req -> Future<View> in
